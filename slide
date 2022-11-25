@@ -1,0 +1,27 @@
+1. install required package:
+sudo apt-get -y install make gcc g++ openmpi-bin openmpi-common libopenmpi-dev
+
+2. For master:
+ ssh - keygen -t rsa
+ 
+ 3. cd to ssh folder:
+ cd ~/.ssh
+ open .
+ 
+ 4. send code from .ssh/id_rsa.pub (master) to slaves (nodes) 
+ 
+ 5. change in hosts file:
+ 
+ sudo nano /etc/hosts
+ 
+ 6. compile the program:
+ 
+ mpicc calculatepi.c -o pi
+ 
+ 7. copy file compile to other slaves (nodes)
+ 
+ scp pi (slave-name@ip):~
+ 
+ 8. execute the program from master:
+ 
+ mpirun -np 6 -- hostfile hosts.mpi pi
